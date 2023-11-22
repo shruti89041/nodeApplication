@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Install Git') {
-            steps {
-                script {
-                    // Switch to root user for installation
-                    sh 'apt-get update'
-                    sh 'apt-get install -y git'
-                }
-            }
-        }
+    //  stage('Install Git') {
+    //      steps {
+    //          script {
+    //                 // Switch to root user for installation
+    //               sh 'apt-get update'
+    //               sh 'apt-get install -y git'
+    //           }
+    //       }
+    //  }
         stage('Clone Repository') {
             steps {
                 script {
