@@ -6,8 +6,8 @@ pipeline {
             steps {
                 script {
                     // Switch to root user for installation
-                    sh 'sudo apt-get update'
-                    sh 'sudo apt-get install -y git'
+                    sh 'apt-get update'
+                    sh 'apt-get install -y git'
                 }
             }
         }
