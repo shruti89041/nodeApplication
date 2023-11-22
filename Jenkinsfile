@@ -5,7 +5,9 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    git 'https://github.com/shruti89041/nodeApplication.git'
+                    withCredentials([usernamePassword(credentialsId: '536cb47f-b978-43fa-a1cc-1e281945ec86', passwordVariable: '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', usernameVariable: 'shruti89041')]) {
+                        git credentialsId: '536cb47f-b978-43fa-a1cc-1e281945ec86', url: 'https://github.com/shruti89041/nodeApplication.git', branch: 'main'
+                    }
                 }
             }
         }
