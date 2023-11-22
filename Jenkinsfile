@@ -29,11 +29,15 @@ pipeline {
             }
         }
 
+
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image('nodeapp').push()
+                    // Use Docker Hub credentials to push the image
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'QWEASDzx78@$', usernameVariable: 'shrutifarkya')]) {
+                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                            docker.image('nodeapp').push()
+                        }
                     }
                 }
             }
