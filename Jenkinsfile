@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Make sure the Dockerfile is in the root directory
-                    def customImage = docker.build("nodeapp", ".")
+                    def customImage = docker.build("nodeapp:latest", ".")
 
                     // Save the customImage variable for later stages
                     env.CUSTOM_IMAGE = customImage.imageName()
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: registryCredentials, passwordVariable: 'QWEASDzx78@$', usernameVariable: 'shrutifarkya')]) {
-                        docker.withRegistry('https://hub.docker.com/repository/docker/shrutifarkya/nodeapp/general', registryCredentials) {
+                        docker.withRegistry('https://index.docker.io/v1/', registryCredentials) {
                             // Use the CUSTOM_IMAGE environment variable saved in the Build Docker Image stage
                             docker.image(env.CUSTOM_IMAGE).push()
                         }
@@ -49,4 +49,5 @@ pipeline {
         }
     }
 }
+
 
