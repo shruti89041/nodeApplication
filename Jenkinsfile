@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Make sure the Dockerfile is in the root directory
-                    def customImage = docker.build("nodeapp:latest", ".")
+                    def customImage = docker.build("shrutifarkya/nodeapp:latest", ".")
 
                     // Save the customImage variable for later stages
                     env.CUSTOM_IMAGE = customImage.imageName()
