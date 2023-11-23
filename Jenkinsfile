@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: registryCredentials, passwordVariable: 'QWEASDzx78@$', usernameVariable: 'shrutifarkya')]) {
-                        docker.withRegistry('https://registry.hub.docker.com', registryCredentials) {
+                        docker.withRegistry('https://hub.docker.com/repository/docker/shrutifarkya/nodeapp/general', registryCredentials) {
                             // Use the CUSTOM_IMAGE environment variable saved in the Build Docker Image stage
                             docker.image(env.CUSTOM_IMAGE).push()
                         }
