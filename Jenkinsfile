@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // Use the CUSTOM_IMAGE environment variable saved in the Build Docker Image stage
-                    docker.image(env.CUSTOM_IMAGE).run('-p 4000:4000')
+                    docker.image(env.CUSTOM_IMAGE).run('-p 4000:3000')
                 }
             }
         }
