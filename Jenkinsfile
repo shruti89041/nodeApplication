@@ -20,11 +20,9 @@ pipeline {
             }
         }
 
-
         stage('Push Docker Image') {
             steps {
                 script {
-                    // Use Docker Hub credentials to push the image
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'QWEASDzx78@$', usernameVariable: 'shrutifarkya')]) {
                         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                             docker.image('nodeapp').push()
@@ -37,7 +35,7 @@ pipeline {
         stage('Pull and Run Docker Image') {
             steps {
                 script {
-                    docker.image('nodeapp').withRun('-p 4000:4000')
+                    docker.image('nodeapp').run('-p 4000:4000')
                 }
             }
         }
