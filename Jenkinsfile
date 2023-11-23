@@ -21,7 +21,7 @@ pipeline {
                     def customImage = docker.build("nodeapp:latest", ".")
 
                     // Save the customImage variable for later stages
-                    env.CUSTOM_IMAGE = customImage.imageName()
+                   // env.CUSTOM_IMAGE = customImage.imageName()
                 }
             }
         }
