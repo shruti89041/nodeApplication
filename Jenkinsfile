@@ -1,13 +1,15 @@
 pipeline {
     agent any
 
+    environment {
+        registryCredentials = 'docker-hub-credentials'
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: '2841e856-8548-4047-a5ab-e2f13dbd4e84', passwordVariable: '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', usernameVariable: 'shruti89041')]) {
-                        git credentialsId: '2841e856-8548-4047-a5ab-e2f13dbd4e84', url: 'https://github.com/shruti89041/nodeApplication.git', branch: 'main'
-                    }
+                    checkout scm
                 }
             }
         }
@@ -15,7 +17,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('nodeapp')
+                    // Make sure the Dockerfile is in the root directory
+                    def customImage = docker.build("nodeapp", ".")
                 }
             }
         }
@@ -23,9 +26,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'QWEASDzx78@$', usernameVariable: 'shrutifarkya')]) {
-                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                            docker.image('nodeapp').push()
+                    withCredentials([usernamePassword(credentialsId: registryCredentials, passwordVariable: 'QWEASDzx78@$', usernameVariable: 'shrutifarkya')]) {
+                        docker.withRegistry('https://registry.hub.docker.com', registryCredentials) {
+                            customImage.push()
                         }
                     }
                 }
@@ -41,3 +44,4 @@ pipeline {
         }
     }
 }
+
