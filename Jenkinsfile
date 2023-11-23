@@ -2,15 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Install Docker') {
-            steps {
-                script {
-                    // Use Docker socket from the host
-                    sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins-agent:latest sudo apt-get update'
-                    sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins-agent:latest sudo apt-get install -y docker.io'
-                }
-            }
-        }
         stage('Clone Repository') {
             steps {
                 script {
